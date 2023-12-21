@@ -1,4 +1,4 @@
-name: Java Gradle Build & Publish Artifact
+name: Java Gradle Build
 
 on:
   push:
@@ -23,12 +23,4 @@ jobs:
         uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
         with:
           arguments: -b ci.gradle package
-      - name: Build with Gradle
-        uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
-        with:
-          arguments: build
-      - uses: actions/upload-artifact@v3
-        with:
-          name: Package
-          path: build/libs
 
