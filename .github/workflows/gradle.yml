@@ -1,26 +1,24 @@
-name: Java Gradle Build
+name: Run Gradle Build
 
 on:
   push:
     branches: [ "main" ]
   pull_request:
     branches: [ "main" ]
-permissions:
-    contents: read
 
 jobs:
-  build_test:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-java@v3
-        with:
-          java-version: '17'
-          distribution: 'temurin'
-      - name: Validate Gradle wrapper
-        uses: gradle/wrapper-validation-action@ccb4328a959376b642e027874838f60f8e596de3
-      - name: Run the Gradle package task
-        uses: gradle/gradle-build-action@749f47bda3e44aa060e82d7b3ef7e40d953bd629
-        with:
-          arguments: -b ci.gradle package
+  build:
 
+    runs-on: ubuntu-latest
+
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 8
+      uses: actions/setup-java@v3
+      with:
+        java-version: '8'
+        distribution: 'temurin'
+    - name: Set up Gradle Build Action
+      uses: gradle/gradle-build-action@v2
+    - name: Build with Gradle
+      run: ./gradlew build
