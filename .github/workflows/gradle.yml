@@ -11,13 +11,18 @@ jobs:
 
     runs-on: ubuntu-latest
 
+    env:
+      CUSTOM_VARIABLE: 'your_custom_value'
+      JAVA_VERSION: '17'
+
     steps:
-    - uses: actions/checkout@v3
-    - name: Set up JDK 8
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up JDK
       uses: actions/setup-java@v3
       with:
-        java-version: '8'
-        distribution: 'temurin'
+        java-version: ${{ env.JAVA_VERSION }}
     - name: Make gradlew executable
       run: |
         chmod +x gradlew
