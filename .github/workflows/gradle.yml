@@ -12,7 +12,7 @@ jobs:
     runs-on: ubuntu-latest
 
     env:
-      CUSTOM_VARIABLE: 'your_custom_value'
+      CUSTOM_VARIABLE: 'JAVA_VERSION'
       JAVA_VERSION: '17'
 
     steps:
