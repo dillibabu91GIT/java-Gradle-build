@@ -50,13 +50,16 @@ jobs:
 
   #  - name: List generated WAR files
    #   run: ls build/libs
-
+ 
     - name: Run SonarQube Scan
       run: |
-          echo "SONAR URL - > " ${{vars.SONAR_HOST_URL}}
-          #export SONAR_TOKEN=${{ secrets.SONAR_TOKEN }}
-          export SONAR_HOST_URL=${{vars.SONAR_HOST_URL}}
-          mvn install sonar:sonar \
-            -D sonar.projectKey=test-maven-project \
-            -D sonar.host.url=$SONAR_HOST_URL \
-            -D sonar.login=admin -D sonar.password=admin123 
+          echo "SONAR URL - > " ${{ secrets.SONAR_HOST_URL }}
+          ./gradlew sonarqube \
+            -Dsonar.projectKey=test-gradle-project \
+            -Dsonar.host.url=${{ secrets.SONAR_HOST_URL }} \
+            -Dsonar.login=${{ secrets.SONAR_TOKEN }}
+      env:
+          SONAR_HOST_URL: ${{ secrets.SONAR_HOST_URL }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+    
+    - run: ./gradlew build
