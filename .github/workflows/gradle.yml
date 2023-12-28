@@ -28,7 +28,7 @@ jobs:
     - name: Make gradlew executable
       run: |
         chmod +x gradlew
-      working-directory: path/to/your/project
+        working-directory: path/to/your/project
     - name: Set up Gradle Build Action
       uses: gradle/gradle-build-action@v2
     - name: Build with Gradle
